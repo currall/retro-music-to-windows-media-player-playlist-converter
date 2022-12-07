@@ -29,4 +29,4 @@ Copy new wpl playlist to Windows' music\playlist folder
 - Replace "playlist,m3u" with filename of Retro Music playlist to convert
 - Replace "music_directory" with music location on PC, e.g "C:\\Files\\Music"
 
-Copy new wpl playlist to Windows' music\playlist folder
+Copy new m3u8 playlist to Windows' music\playlist folder
