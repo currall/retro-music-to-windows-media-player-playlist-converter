@@ -6,7 +6,7 @@ Converts playlists created in Retro Music (https://play.google.com/store/apps/de
 
 > python
 
-> from wpl_converter import create_wpl_playlist
+> from converter import create_wpl_playlist
 
 > create_wpl_playlist("playlist","playlist.m3u")
 
