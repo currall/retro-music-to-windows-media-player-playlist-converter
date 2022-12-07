@@ -6,9 +6,9 @@ Converts playlists created in Retro Music (https://play.google.com/store/apps/de
 
 > python
 
-> from converter import create_wmp_playlist
+> from wpl_converter import create_wpl_playlist
 
-> create_wmp_playlist("playlist","playlist.m3u")
+> create_wpl_playlist("playlist","playlist.m3u")
 
 - Replace "playlist" with desired playlist name
 - Replace "playlist,m3u" with filename of Retro Music playlist to convert
