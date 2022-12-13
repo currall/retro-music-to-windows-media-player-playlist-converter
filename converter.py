@@ -1,4 +1,4 @@
-def get_filelist(playlist_m3u):
+def get_filelist(playlist_m3u,raw):
 
     playlist2 = []
 
@@ -13,22 +13,26 @@ def get_filelist(playlist_m3u):
                 j += 1
 
             filename_raw = playlist[i][j:-1]
-
-            filename = filename_raw.replace("/","\\")
-            filename = filename.replace("&","&amp;") # filter out illegal characters
-            filename = filename.replace("'","&apos;")
-            playlist2.append(filename)
+            
+            if raw:
+                filename = filename_raw.replace("/","\\")# filter out illegal characters
+                playlist2.append(filename)
+            else: # apply filter if using old media player
+                filename = filename_raw.replace("/","\\")# filter out illegal characters
+                filename = filename.replace("&","&amp;") 
+                filename = filename.replace("'","&apos;")
+                playlist2.append(filename)
             
         else:
             playlist[i] = ""
 
     return(playlist2)
 
-def create_wmp_playlist(name,m3u):
+def create_wpl_playlist(name,m3u):
 
-    m3u = get_filelist(m3u)
+    m3u = get_filelist(m3u,False)
 
-    f = open(name+".wpl","a") # create wmp playlist
+    f = open(name+".wpl","a") # create wpl playlist
 
     playlist = [
 '<?wpl version="1.0"?>\n', # default wmp playlist junk
@@ -53,5 +57,25 @@ def create_wmp_playlist(name,m3u):
     for i in range(len(playlist)):
         f.write(playlist[i])
 
+def create_m3u8_playlist(name,m3u,music_dir):
+
+    m3u = get_filelist(m3u,True)
+
+    f = open(name+".m3u8","a") # create m3u8 playlist
+
+    playlist = [
+'#EXTM3U\n',
+'#'+name+'.m3u8\n'
+        ]
+
+    for i in range(len(m3u)):
+        playlist.append(music_dir+m3u[i]+'\n')
+
+    for i in range(len(playlist)):
+        f.write(playlist[i])
+
 # Enter Playlist Name and Retro Music Playlist filename
-#create_wmp_playlist("playlist","playlist.m3u")
+# Example commands:
+
+#create_wpl_playlist("playlist","playlist.m3u")
+#create_m3u8_playlist("playlist","playlist.m3u","C:\\Files\\Music")
